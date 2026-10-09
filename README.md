@@ -2,8 +2,8 @@
 ## Purpose : 
 Monitor changes in directory "./dir" and check for malicious files that either have a flagged extension or a flagged keyword embedded inside it 
 
-### flagged extensions : 
-### flagged keywords :
+### flagged extensions :  .exe, .bat, .vbs, .scr, .ps1
+### flagged keywords : virus, trojan, malware, worm, ransomware
 
 ## Behavior : 
 ## antiviusd.sh file :
