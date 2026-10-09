@@ -18,3 +18,41 @@ for i in  "${!files[@]}";
 	do
 		echo "$((i +1)): $(basename "${files[$i]}")"
 	done
+
+echo
+read -p "Choose a file number: " choice
+
+if ! [[ "$choice" =~ ^[0-9]+$ ]] ||
+   [ "$choice" -lt 1 ] || [ "$choice" -gt "${#files[@]}" ]; then
+    echo "Invalid choice."
+    exit 1
+fi
+
+selected_file="${files[$((choice - 1))]}"
+
+echo "Selected: $(basename "$selected_file")"
+echo "--------------------------------------------"
+echo "1. Restore file"
+echo "2. Permanently delete file"
+echo "3. Go back"
+
+read -p "Choose an option: " action
+
+case "$action" in
+    1)
+        mv -- "$selected_file" "$dir/"
+        echo "File restored."
+        ;;
+    2)
+        rm -- "$selected_file"
+        echo "File permanently deleted."
+        ;;
+    3)
+        echo "Going back."
+        exit 0
+        ;;
+    *)
+        echo "Invalid option."
+        exit 1
+        ;;
+esac
