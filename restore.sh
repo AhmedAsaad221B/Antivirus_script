@@ -1,14 +1,16 @@
 #!/bin/bash 
 
 
-dir="dir"
+dir="$1"
 
-malicious_dir="malicious_dir"
+malicious_dir="$2"
+
+while true ; do 
 
 files=("$malicious_dir"/*)
 
 if [ ! -e "${files[0]}" ] ; then
-	echo "NO QUARANTINED FILES"
+	echo "no malicious files to review"
 	exit 0
 fi
 
@@ -25,8 +27,9 @@ read -p "Choose a file number: " choice
 if ! [[ "$choice" =~ ^[0-9]+$ ]] ||
    [ "$choice" -lt 1 ] || [ "$choice" -gt "${#files[@]}" ]; then
     echo "Invalid choice."
-    exit 1
+    continue
 fi
+ 
 
 selected_file="${files[$((choice - 1))]}"
 
@@ -49,10 +52,10 @@ case "$action" in
         ;;
     3)
         echo "Going back."
-        exit 0
         ;;
     *)
         echo "Invalid option."
-        exit 1
         ;;
 esac
+
+done 
