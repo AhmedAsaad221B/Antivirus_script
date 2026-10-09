@@ -11,9 +11,9 @@ keywords_list=(virus trojan malware worm ransomware)
 
 
 scan_directory() {
-	malicious=false
 	for file in "$dir"/*;
 	do
+	malicious=false
         extension="${file##*.}"
 	case "$extension" in 
 	   exe | bat | vbs | scr | ps1)
